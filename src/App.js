@@ -5,28 +5,21 @@ const Father = styled.div`
 `;
 
 const Box = styled.div`
-  background-color: teal;
+  background-color: ${({ bgColor }) => bgColor};
   width: 100px;
   height: 100px;
 `;
 
-const BoxTwo = styled.div`
-  background-color: tomato;
-  width: 100px;
-  height: 100px;
-`;
-
-const Text = styled.span`
-  color: white;
+const Circle = styled(Box)`
+  border-radius: 50%;
 `;
 
 function App() {
   return (
     <Father>
-      <Box>
-        <Text>Hello</Text>
-      </Box>
-      <BoxTwo></BoxTwo>
+      <Box bgColor="teal" />
+      <Box bgColor="tomato" />
+      <Circle bgColor="yellow" />
     </Father>
   );
 }
