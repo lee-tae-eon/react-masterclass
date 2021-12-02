@@ -4,6 +4,18 @@ const Father = styled.div`
   display: flex;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  color: tomato;
+`;
+
 const Input = styled.input.attrs({ required: true })`
   background-color: tomato;
 `;
@@ -40,12 +52,15 @@ const Box = styled.div`
 
 function App() {
   return (
-    <Father>
-      <Input />
-      <Box>
-        <Emoji as="p">✅</Emoji>
-      </Box>
-    </Father>
+    <Wrapper>
+      <Title>hello</Title>
+      {/* <Father>
+        <Input />
+        <Box>
+          <Emoji as="p">✅</Emoji>
+        </Box>
+      </Father> */}
+    </Wrapper>
   );
 }
 
