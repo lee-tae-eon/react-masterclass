@@ -21,6 +21,10 @@ const animation = keyframes`
   }
 `;
 
+const Emoji = styled.span`
+  font-size: 36px;
+`;
+
 const Box = styled.div`
   width: 200px;
   height: 200px;
@@ -29,11 +33,8 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${animation} 2s linear infinite;
-  span {
-    font-size: 36px;
-    &:hover {
-      font-size: 50px;
-    }
+  ${Emoji}:hover {
+    font-size: 98px;
   }
 `;
 
@@ -42,7 +43,7 @@ function App() {
     <Father>
       <Input />
       <Box>
-        <span>✅</span>
+        <Emoji as="p">✅</Emoji>
       </Box>
     </Father>
   );
