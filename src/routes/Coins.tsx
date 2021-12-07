@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Title = styled.h1`
@@ -5,7 +6,13 @@ const Title = styled.h1`
 `;
 
 function Coins() {
-  return <Title>Coins</Title>;
+  const [coins, setCoins] = useState<string>("");
+  return (
+    <div>
+      test 중입니다.
+      <Title>Coins</Title>
+    </div>
+  );
 }
 
 export default Coins;
