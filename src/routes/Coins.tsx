@@ -17,9 +17,18 @@ const CoinList = styled.ul``;
 const Coin = styled.li`
   background-color: white;
   color: ${(props) => props.theme.bgColor};
-  padding: 20px;
-  border-radius: 20px;
+  border-radius: 15px;
   margin-bottom: 10px;
+  a {
+    padding: 20px;
+    transition: color 0.2s ease-in;
+    display: block;
+  }
+  &:hover {
+    a {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -66,8 +75,7 @@ function Coins() {
       <CoinList>
         {coins.map((coin: any) => (
           <Coin key={coin.id}>
-            {coin.name}
-            <Link to={`/${coin.id}`}>&rarr;</Link>
+            <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
           </Coin>
         ))}
       </CoinList>
