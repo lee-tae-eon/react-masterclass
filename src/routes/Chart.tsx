@@ -31,21 +31,36 @@ function Chart({ coinId }: ChartProps) {
           type="line"
           series={[
             {
-              name: "hello",
-              data: [1, 2, 3, 4, 5, 6],
-            },
-            {
-              name: "sales",
-              data: [15, 18, 15, 78, 99, 22],
+              name: "Price",
+              data: data?.map((price) => price.close),
             },
           ]}
           options={{
             theme: {
               mode: "dark",
             },
+            xaxis: {
+              labels: {
+                show: false,
+              },
+              axisBorder: { show: false },
+              axisTicks: { show: false },
+            },
+            yaxis: {
+              show: false,
+            },
             chart: {
               height: 500,
               width: 500,
+              background: "transparent",
+              toolbar: {
+                show: false,
+              },
+            },
+            grid: { show: false },
+            stroke: {
+              curve: "smooth",
+              width: 4,
             },
           }}
         />
