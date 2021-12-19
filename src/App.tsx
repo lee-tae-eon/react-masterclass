@@ -66,17 +66,11 @@ a {
 `;
 
 function App() {
-  const [isDark, setIsDark] = useState<boolean>(false);
-
-  const toggleDark = () => {
-    setIsDark((current) => !current);
-  };
-
   return (
     <>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <ThemeProvider theme={false ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Router toggleDark={toggleDark} isDark={isDark} />
+        <Router />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>
