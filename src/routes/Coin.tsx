@@ -144,7 +144,12 @@ interface PriceData {
   };
 }
 
-function Coin() {
+interface ICoinProps {
+  toggleDark: () => void;
+  isDark: boolean;
+}
+
+function Coin({ toggleDark, isDark }: ICoinProps) {
   const { coinId } = useParams<ParamsProps>();
   const { state } = useLocation<RouteStateProps>();
   const priceMatch = useRouteMatch("/:coinId/price");
@@ -179,6 +184,7 @@ function Coin() {
             ? "Loading ..."
             : coinInfoData?.name}
         </Title>
+        <button onClick={toggleDark}>toggle Dark mode</button>
       </Header>
       {loading ? (
         <Loader>"Loading..."</Loader>
@@ -222,7 +228,7 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/:coinId/chart`}>
-              <Chart coinId={coinId} />
+              <Chart coinId={coinId} isDark={isDark} />
             </Route>
           </Switch>
         </>
