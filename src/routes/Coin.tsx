@@ -12,6 +12,8 @@ import styled from "styled-components";
 import { fetchInfoData, fetchPriceData } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 20px;
@@ -145,6 +147,8 @@ interface PriceData {
 }
 
 function Coin() {
+  const setMode = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setMode((prev) => !prev);
   const { coinId } = useParams<ParamsProps>();
   const { state } = useLocation<RouteStateProps>();
   const priceMatch = useRouteMatch("/:coinId/price");
@@ -179,7 +183,7 @@ function Coin() {
             ? "Loading ..."
             : coinInfoData?.name}
         </Title>
-        <button>toggle Dark mode</button>
+        <button onClick={toggleDarkAtom}>toggle Dark mode</button>
       </Header>
       {loading ? (
         <Loader>"Loading..."</Loader>
