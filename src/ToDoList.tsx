@@ -31,17 +31,21 @@ interface TodoFormProps {
 }
 
 const ToDoList = () => {
-  const { register, getValues, watch } = useForm<TodoFormProps>({
+  const { register, getValues, watch, handleSubmit } = useForm<TodoFormProps>({
     mode: "onChange",
   });
 
   const { toDo } = watch();
 
+  const onValid = (data: any) => {
+    console.log(data);
+  };
+
   console.log(toDo);
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit(onValid)}>
         <input {...register("toDo")} placeholder="Write a to do" />
         <button>Add</button>
       </form>
