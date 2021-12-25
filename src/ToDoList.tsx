@@ -34,7 +34,8 @@ const ToDoList = () => {
   const { register, getValues, watch, handleSubmit } = useForm<TodoFormProps>({
     mode: "onChange",
   });
-
+  const test = "test";
+  const test1 = "test1";
   const { toDo } = watch();
 
   const onValid = (data: any) => {
