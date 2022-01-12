@@ -7,13 +7,29 @@ function App() {
       <div>
         {/* droppable의 children은 function이어야 함 */}
         <Droppable droppableId="one">
-          {() => (
-            <ul>
+          {(provided) => (
+            <ul ref={provided.innerRef} {...provided.droppableProps}>
               <Draggable draggableId="first" index={0}>
-                {() => <li>ONE</li>}
+                {(magic) => (
+                  <li
+                    ref={magic.innerRef}
+                    {...magic.draggableProps}
+                    {...magic.dragHandleProps}
+                  >
+                    ONE
+                  </li>
+                )}
               </Draggable>
               <Draggable draggableId="second" index={1}>
-                {() => <li>TWO</li>}
+                {(magic) => (
+                  <li
+                    ref={magic.innerRef}
+                    {...magic.draggableProps}
+                    {...magic.dragHandleProps}
+                  >
+                    TWO
+                  </li>
+                )}
               </Draggable>
             </ul>
           )}
