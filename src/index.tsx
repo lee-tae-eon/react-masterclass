@@ -45,7 +45,7 @@ body {
   line-height: 1;
   font-family: 'Source Sans Pro', sans-serif;
   background-color: ${({ theme }) => theme.bgColor};
-  color: ${(props) => props.theme.textColor};
+
 }
 menu, ol, ul {
   list-style: none;
