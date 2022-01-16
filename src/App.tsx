@@ -24,8 +24,23 @@ const Boards = styled.div`
 
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
-  const onDragEnd = ({ destination, source, draggableId }: DropResult) => {
-    if (!destination) return;
+  const onDragEnd = (info: DropResult) => {
+    const { destination, draggableId, source } = info;
+
+    if (destination?.droppableId === source.droppableId) {
+      setToDos((allBoards) => {
+        const boardCopy = [...allBoards[source.droppableId]];
+        boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination?.index, 0, draggableId);
+        return {
+          ...allBoards,
+          [source.droppableId]: boardCopy,
+        };
+      });
+    } else {
+    }
+
+    // !   이전 코드임
     // setToDos((prev) => {
     //   const copyPrev = [...prev];
     //   copyPrev.splice(source.index, 1);

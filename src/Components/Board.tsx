@@ -9,6 +9,14 @@ const Wrapper = styled.div`
   border-radius: 5px;
   min-height: 200px;
 `;
+const Title = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-weight: 600;
+  margin-bottom: 20px;
+`;
 
 interface BoardProps {
   toDos: string[];
@@ -17,16 +25,19 @@ interface BoardProps {
 
 function Board({ toDos, boardId }: BoardProps) {
   return (
-    <Droppable droppableId={boardId}>
-      {(provided) => (
-        <Wrapper ref={provided.innerRef} {...provided.droppableProps}>
-          {toDos.map((toDo, index) => (
-            <DragabbleCard key={toDo} toDo={toDo} index={index} />
-          ))}
-          {provided.placeholder}
-        </Wrapper>
-      )}
-    </Droppable>
+    <Wrapper>
+      <Title>{boardId}</Title>
+      <Droppable droppableId={boardId}>
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {toDos.map((toDo, index) => (
+              <DragabbleCard key={toDo} toDo={toDo} index={index} />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </Wrapper>
   );
 }
 
