@@ -1,7 +1,8 @@
 import { Droppable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { IToDo } from "../atoms";
+import { IToDo, toDoState } from "../atoms";
 import DragabbleCard from "./DragabbleCard";
 
 const Wrapper = styled.div`
@@ -15,12 +16,9 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 const Title = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  text-align: center;
   font-weight: 600;
-  padding-bottom: 5px;
+  font-size: 18px;
   margin-bottom: 0 10px;
 `;
 
@@ -58,9 +56,20 @@ interface IForm {
 }
 
 function Board({ toDos, boardId }: BoardProps) {
+  const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
 
   const onValid = ({ toDo }: IForm) => {
+    const newToDo = {
+      id: Date.now(),
+      text: toDo,
+    };
+    setToDos((prev) => {
+      return {
+        ...prev,
+        [boardId]: [newToDo, ...prev[boardId]],
+      };
+    });
     setValue("toDo", "");
   };
   return (
@@ -74,12 +83,12 @@ function Board({ toDos, boardId }: BoardProps) {
         />
       </Form>
       <Droppable droppableId={boardId}>
-        {(provided, snapshot) => (
+        {(magic, info) => (
           <Area
-            isDraggingOver={snapshot.isDraggingOver}
-            isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
+            isDraggingOver={info.isDraggingOver}
+            isDraggingFromThis={Boolean(info.draggingFromThisWith)}
+            ref={magic.innerRef}
+            {...magic.droppableProps}
           >
             {toDos.map((toDo, index) => (
               <DragabbleCard
@@ -89,7 +98,7 @@ function Board({ toDos, boardId }: BoardProps) {
                 index={index}
               />
             ))}
-            {provided.placeholder}
+            {magic.placeholder}
           </Area>
         )}
       </Droppable>
