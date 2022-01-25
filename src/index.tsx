@@ -42,9 +42,11 @@ footer, header, hgroup, main, menu, nav, section {
   box-sizing: border-box;
 }
 body {
-  line-height: 1;
+  font-weight: 300;
+  color: black;
+  line-height: 1.2;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: linear-gradient(135deg, #e09, #d0e);
+  background: linear-gradient(135deg, #e09, #d0e);
 
 }
 menu, ol, ul {
