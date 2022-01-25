@@ -44,7 +44,7 @@ footer, header, hgroup, main, menu, nav, section {
 body {
   line-height: 1;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: ${({ theme }) => theme.bgColor};
+  background-color: linear-gradient(135deg, #e09, #d0e);
 
 }
 menu, ol, ul {
