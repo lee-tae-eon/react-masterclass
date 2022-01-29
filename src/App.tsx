@@ -28,21 +28,11 @@ const Box = styled(motion.div)`
 // `;
 
 const boxVariants = {
-  start: {
-    opacity: 0,
-    scale: 0.5,
+  hover: {
+    scale: 1.2,
+    rotateZ: 90,
   },
-  end: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring",
-      duration: 0.5,
-      bounce: 0.5,
-      delayChildren: 0.4,
-      staggerChildren: 0.1,
-    },
-  },
+  click: { scale: 1, borderRadius: "100px" },
 };
 
 // const circleVariants = {
@@ -59,10 +49,7 @@ const boxVariants = {
 function App() {
   return (
     <Wrapper>
-      <Box
-        whileHover={{ scale: 1.5, rotateZ: 90 }}
-        whileTap={{ scale: 1, borderRadius: "100px" }}
-      />
+      <Box variants={boxVariants} whileHover="hover" whileTap="click" />
       {/* <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
