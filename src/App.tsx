@@ -1,25 +1,30 @@
 import styled from "styled-components";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useViewportScroll,
+} from "framer-motion";
 import { useEffect } from "react";
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   max-width: 100vw;
-  height: 100vh;
+  height: 200vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const BiggerBox = styled.div`
-  width: 400px;
-  height: 400px;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-`;
+// const BiggerBox = styled.div`
+//   width: 400px;
+//   height: 400px;
+//   background-color: rgba(255, 255, 255, 0.4);
+//   border-radius: 40px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   overflow: hidden;
+// `;
 
 const Box = styled(motion.div)`
   width: 100px;
@@ -64,11 +69,21 @@ const Box = styled(motion.div)`
 
 function App() {
   const x = useMotionValue(0);
-  const potato = useTransform(x, [-800, 0, 800], [2, 1, 0.1]);
+  const rotateZ = useTransform(x, [-800, 800], [-360, 360]);
+  const gradient = useTransform(
+    x,
+    [-800, 800],
+    [
+      "linear-gradient(135deg, rgb(73, 132, 198), rgb(36, 39, 206))",
 
+      "linear-gradient(135deg, rgb(108, 217, 83), rgb(177, 175, 60))",
+    ]
+  );
+  const { scrollYProgress } = useViewportScroll();
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
   return (
-    <Wrapper>
-      <Box style={{ x, scale: potato }} drag="x" dragSnapToOrigin />
+    <Wrapper style={{ background: gradient }}>
+      <Box style={{ x, rotateZ, scale }} drag="x" dragSnapToOrigin />
       {/* <BiggerBox ref={biggerBoxElement}>
         <Box
           drag
