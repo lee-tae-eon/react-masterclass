@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 const Wrapper = styled.div`
   max-width: 100vw;
@@ -11,8 +11,8 @@ const Wrapper = styled.div`
 `;
 
 const BiggerBox = styled.div`
-  width: 600px;
-  height: 600px;
+  width: 400px;
+  height: 400px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 40px;
   display: flex;
@@ -22,8 +22,8 @@ const BiggerBox = styled.div`
 `;
 
 const Box = styled(motion.div)`
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
 
   background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
@@ -39,17 +39,17 @@ const Box = styled(motion.div)`
 //   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 // `;
 
-const boxVariants = {
-  hover: {
-    scale: 1.2,
-    rotateZ: 90,
-  },
-  click: { scale: 1, borderRadius: "100px" },
-  drag: {
-    backgroundColor: "rgba(46,100,230, 0.2)",
-    transition: { duration: 0.5 },
-  },
-};
+// const boxVariants = {
+//   hover: {
+//     scale: 1.2,
+//     rotateZ: 90,
+//   },
+//   click: { scale: 1, borderRadius: "100px" },
+//   drag: {
+//     backgroundColor: "rgba(46,100,230, 0.2)",
+//     transition: { duration: 0.5 },
+//   },
+// };
 
 // const circleVariants = {
 //   start: {
@@ -63,10 +63,13 @@ const boxVariants = {
 // };
 
 function App() {
-  const biggerBoxElement = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+
   return (
     <Wrapper>
-      <BiggerBox ref={biggerBoxElement}>
+      <button onClick={() => x.set(200)}>click</button>
+      <Box style={{ x: x }} drag="x" dragSnapToOrigin />
+      {/* <BiggerBox ref={biggerBoxElement}>
         <Box
           drag
           dragSnapToOrigin
@@ -77,7 +80,7 @@ function App() {
           whileDrag="drag"
           whileTap="click"
         />
-      </BiggerBox>
+      </BiggerBox> */}
       {/* <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
