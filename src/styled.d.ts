@@ -9,7 +9,7 @@ declare module "styled-components" {
       lighter: string;
     };
     white: {
-      ligther: string;
+      lighter: string;
       darker: string;
     };
   }
