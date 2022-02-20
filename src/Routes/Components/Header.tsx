@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useState } from "react";
 
@@ -76,7 +76,17 @@ const Circle = styled(motion.span)`
 const Input = styled(motion.input)`
   transform-origin: right center;
   position: absolute;
-  left: -150px;
+  right: 0;
+  background-color: transparent;
+  padding: 5px 10px;
+  padding-left: 40px;
+  z-index: -1;
+  border: 1px solid ${(props) => props.theme.white.lighter};
+  color: white;
+  font-size: 16px;
+  &::placeholder {
+    color: whitesmoke;
+  }
 `;
 
 const logoVariants = {
@@ -95,8 +105,14 @@ function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const HomeMatch = useRouteMatch("/");
   const tvMatch = useRouteMatch("/tv");
+  const inputAnimation = useAnimation();
 
-  const toggleSearch = () => setSearchOpen((prev) => !prev);
+  const toggleSearch = () => {
+    if (searchOpen) {
+    } else {
+    }
+    setSearchOpen((prev) => !prev);
+  };
 
   return (
     <Nav>
@@ -129,7 +145,7 @@ function Header() {
         <Search>
           <motion.svg
             onClick={toggleSearch}
-            animate={{ x: searchOpen ? -180 : 0 }}
+            animate={{ x: searchOpen ? -185 : 0 }}
             transition={{ type: "linear" }}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -142,7 +158,7 @@ function Header() {
             ></path>
           </motion.svg>
           <Input
-            animate={{ scaleX: searchOpen ? 1 : 0 }}
+            animate={inputAnimation}
             transition={{ type: "linear" }}
             placeholder="Search for movie or tv show"
           />
